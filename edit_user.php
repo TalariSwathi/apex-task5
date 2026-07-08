@@ -25,12 +25,15 @@ if(isset($_POST['update']))
 
     if(mysqli_query($conn, $sql))
     {
-        header("Location: manage_users.php");
+        echo "<script>
+                alert('User Updated Successfully!');
+                window.location='manage_users.php';
+              </script>";
         exit();
     }
     else
     {
-        echo "Update Failed!";
+        echo "<script>alert('Update Failed!');</script>";
     }
 }
 ?>
@@ -39,46 +42,83 @@ if(isset($_POST['update']))
 <html>
 <head>
     <title>Edit User</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<h2>Edit User</h2>
+<div class="container">
 
-<form method="POST">
+    <h2>Edit User</h2>
 
-Name:<br>
-<input type="text" name="name"
-value="<?php echo $row['name']; ?>" required><br><br>
+    <form method="POST">
 
-Email:<br>
-<input type="email" name="email"
-value="<?php echo $row['email']; ?>" required><br><br>
+        <label>Name</label>
+        <input
+            type="text"
+            name="name"
+            value="<?php echo $row['name']; ?>"
+            required
+        >
 
-Phone:<br>
-<input type="text" name="phone"
-value="<?php echo $row['phone']; ?>" required><br><br>
+        <label>Email</label>
+        <input
+            type="email"
+            name="email"
+            value="<?php echo $row['email']; ?>"
+            required
+        >
 
-Gender:<br>
+        <label>Phone</label>
+        <input
+            type="text"
+            name="phone"
+            value="<?php echo $row['phone']; ?>"
+            required
+        >
 
-<input type="radio" name="gender" value="Male"
-<?php if($row['gender']=="Male") echo "checked"; ?>>
-Male
+        <label>Gender</label>
 
-<input type="radio" name="gender" value="Female"
-<?php if($row['gender']=="Female") echo "checked"; ?>>
-Female
+        <div class="gender">
+            <input
+                type="radio"
+                name="gender"
+                value="Male"
+                <?php if($row['gender']=="Male") echo "checked"; ?>
+            > Male
 
-<br><br>
+            &nbsp;&nbsp;
 
-City:<br>
-<input type="text" name="city"
-value="<?php echo $row['city']; ?>" required><br><br>
+            <input
+                type="radio"
+                name="gender"
+                value="Female"
+                <?php if($row['gender']=="Female") echo "checked"; ?>
+            > Female
+        </div>
 
-<button type="submit" name="update">
-Update
-</button>
+        <label>City</label>
+        <input
+            type="text"
+            name="city"
+            value="<?php echo $row['city']; ?>"
+            required
+        >
 
-</form>
+        <button type="submit" name="update">
+            Update User
+        </button>
+
+        <br><br>
+
+        <button
+            type="button"
+            onclick="window.location.href='manage_users.php'">
+            Back
+        </button>
+
+    </form>
+
+</div>
 
 </body>
 </html>

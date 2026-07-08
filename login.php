@@ -37,30 +37,52 @@ if(isset($_POST['login']))
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login</title>
+    <title>User Login</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<h2>User Login</h2>
+<div class="container">
 
-<?php
-if($message != "")
-{
-    echo "<p>$message</p>";
-}
-?>
+    <h2>User Login</h2>
 
-<form method="POST">
+    <?php
+    if($message != "")
+    {
+        echo "<p style='color:red; text-align:center; margin-bottom:15px;'>$message</p>";
+    }
+    ?>
 
-    <label>Email:</label><br>
-    <input type="email" name="email" required><br><br>
+    <form method="POST">
 
-    <label>Password:</label><br>
-    <input type="password" name="password" required><br><br>
+        <label>Email</label>
+        <input
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+        >
 
-    <button type="submit" name="login">Login</button>
+        <label>Password</label>
+        <input
+            type="password"
+            name="password"
+            placeholder="Enter your password"
+            required
+        >
 
-</form>
+        <button type="submit" name="login">
+            Login
+        </button>
+
+    </form>
+
+    <p style="margin-top:20px;">
+        Don't have an account?
+        <a href="register.php">Register Here</a>
+    </p>
+
+</div>
 
 </body>
 </html>

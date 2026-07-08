@@ -16,11 +16,11 @@ if(isset($_POST['register']))
 
     if(mysqli_query($conn,$sql))
     {
-        echo "Registration Successful!";
+        echo "<script>alert('Registration Successful!');</script>";
     }
     else
     {
-        echo "Error!";
+        echo "<script>alert('Registration Failed!');</script>";
     }
 }
 ?>
@@ -28,39 +28,52 @@ if(isset($_POST['register']))
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Register</title>
+    <title>User Registration</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<h2>User Registration</h2>
+<div class="container">
 
-<form method="POST">
+    <h2>User Registration</h2>
 
-    Name:<br>
-    <input type="text" name="name" required><br><br>
+    <form method="POST">
 
-    Email:<br>
-    <input type="email" name="email" required><br><br>
+        <label>Name</label>
+        <input type="text" name="name" placeholder="Enter your name" required>
 
-    Password:<br>
-    <input type="password" name="password" required><br><br>
+        <label>Email</label>
+        <input type="email" name="email" placeholder="Enter your email" required>
 
-    Phone:<br>
-    <input type="text" name="phone" required><br><br>
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Enter your password" required>
 
-    Gender:<br>
-    <input type="radio" name="gender" value="Male" required> Male
-    <input type="radio" name="gender" value="Female"> Female
-    <br><br>
+        <label>Phone</label>
+        <input type="text" name="phone" placeholder="Enter your phone number" required>
 
-    City:<br>
-    <input type="text" name="city" required><br><br>
+        <label>Gender</label>
 
-    <button type="submit" name="register">
-        Register
-    </button>
+        <div class="gender">
+            <input type="radio" name="gender" value="Male" required> Male
+            &nbsp;&nbsp;
+            <input type="radio" name="gender" value="Female"> Female
+        </div>
 
-</form>
+        <label>City</label>
+        <input type="text" name="city" placeholder="Enter your city" required>
+
+        <button type="submit" name="register">
+            Register
+        </button>
+
+    </form>
+
+    <p>
+        Already have an account?
+        <a href="login.php">Login Here</a>
+    </p>
+
+</div>
 
 </body>
 </html>
