@@ -18,7 +18,11 @@ if(isset($_POST['login']))
 
         if(password_verify($password, $user['password']))
         {
+            // Store user information in session
             $_SESSION['user'] = $user['name'];
+            $_SESSION['email'] = $user['email'];
+            $_SESSION['role'] = $user['role'];
+
             header("Location: dashboard.php");
             exit();
         }
@@ -77,7 +81,7 @@ if(isset($_POST['login']))
 
     </form>
 
-    <p style="margin-top:20px;">
+    <p style="margin-top:20px; text-align:center;">
         Don't have an account?
         <a href="register.php">Register Here</a>
     </p>

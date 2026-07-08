@@ -24,11 +24,23 @@ if(!isset($_SESSION['user']))
         Hello, <strong><?php echo $_SESSION['user']; ?></strong>
     </p>
 
-    <p style="text-align:center; margin-top:10px;">
-        You have successfully logged in. Use the options below to manage the application.
+    <p style="text-align:center;">
+        <strong>Role:</strong>
+        <?php echo ucfirst($_SESSION['role']); ?>
     </p>
 
     <br>
+
+    <button onclick="window.location.href='profile.php'">
+        👤 My Profile
+    </button>
+
+    <br><br>
+
+    <?php
+    if($_SESSION['role'] == "admin")
+    {
+    ?>
 
     <button onclick="window.location.href='manage_users.php'">
         👥 Manage Users
@@ -38,6 +50,17 @@ if(!isset($_SESSION['user']))
 
     <button onclick="window.location.href='register.php'">
         ➕ Register New User
+    </button>
+
+    <br><br>
+
+    <?php
+    }
+    ?>
+
+    <!-- New Currency Exchange Button -->
+    <button onclick="window.location.href='currency.php'">
+        💱 Currency Exchange
     </button>
 
     <br><br>

@@ -1,4 +1,23 @@
 <?php
+session_start();
+
+// Check if user is logged in
+if(!isset($_SESSION['user']))
+{
+    header("Location: login.php");
+    exit();
+}
+
+// Allow only admins
+if($_SESSION['role'] != "admin")
+{
+    echo "<script>
+            alert('Access Denied! Only Admin can access this page.');
+            window.location='dashboard.php';
+          </script>";
+    exit();
+}
+
 include 'db.php';
 
 $result = mysqli_query($conn, "SELECT * FROM users");
@@ -30,6 +49,7 @@ $totalUsers = mysqli_num_rows($result);
             <th>Phone</th>
             <th>Gender</th>
             <th>City</th>
+            <th>Role</th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>
@@ -40,27 +60,21 @@ $totalUsers = mysqli_num_rows($result);
         while($row = mysqli_fetch_assoc($result))
         {
         ?>
-
         <tr>
 
             <td><?php echo $count++; ?></td>
-
             <td><?php echo $row['id']; ?></td>
-
             <td><?php echo $row['name']; ?></td>
-
             <td><?php echo $row['email']; ?></td>
-
             <td><?php echo $row['phone']; ?></td>
-
             <td><?php echo $row['gender']; ?></td>
-
             <td><?php echo $row['city']; ?></td>
+            <td><?php echo ucfirst($row['role']); ?></td>
 
             <td>
                 <a class="edit-btn"
                    href="edit_user.php?id=<?php echo $row['id']; ?>">
-                   ✏ Edit
+                    ✏ Edit
                 </a>
             </td>
 
@@ -68,12 +82,11 @@ $totalUsers = mysqli_num_rows($result);
                 <a class="delete-btn"
                    href="delete_user.php?id=<?php echo $row['id']; ?>"
                    onclick="return confirm('Are you sure you want to delete this user?');">
-                   🗑 Delete
+                    🗑 Delete
                 </a>
             </td>
 
         </tr>
-
         <?php
         }
         ?>
